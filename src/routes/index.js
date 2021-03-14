@@ -11,7 +11,11 @@ router.get("/items", async (req, res) => {
   const { q } = req.query;
   const urlRequest = {
     url: `${getBaseUrl()}/sites/MLA/search?q=${q}`,
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+    },
   };
+  console.log("urlRequest", urlRequest);
   request.get(urlRequest, (err, body) => {
     try {
       if (err) {
@@ -20,7 +24,8 @@ router.get("/items", async (req, res) => {
         const dataRes = formatJSONResponse(JSON.parse(body.body));
         res.status(200).json(dataRes);
       } else {
-        res.status(body.statusCode).json(JSON.parse(body.body));
+        console.log("body.body", body.body);
+        res.status(body.statusCode).json(body.body);
       }
     } catch (err) {
       console.log("err", err);
@@ -45,6 +50,7 @@ router.get("/items/:id", (req, res) => {
         res.status(body.statusCode).json(JSON.parse(body.body));
       }
     } catch (err) {
+      console.log("err", err);
       res.status(500).json(err);
     }
   });
