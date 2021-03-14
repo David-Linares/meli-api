@@ -29,7 +29,11 @@ module.exports = {
         ...formatItem(dataJson),
         sold_quantity: dataJson.sold_quantity,
         description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam egestas dui quis eros maximus, a porttitor quam porttitor. Praesent ipsum metus, accumsan sit amet mollis eget, iaculis eget massa. Aliquam at purus sed enim condimentum pulvinar. Nulla mollis non est id mollis. In bibendum porttitor massa, eget rutrum eros iaculis sed. In sed nisi quis tortor iaculis cursus at et turpis. Cras sagittis purus vitae volutpat imperdiet. Morbi suscipit libero quis tellus aliquet vehicula. Sed auctor, sem tincidunt iaculis convallis, mauris nunc facilisis sapien, quis venenatis massa sapien id elit. Sed posuere mi vel dolor tincidunt efficitur. Nunc dictum risus leo. Maecenas ullamcorper purus ac felis tincidunt, et aliquet erat eleifend.",
+          dataJson.plain_text && dataJson.plain_text != ""
+            ? dataJson.plain_text
+            : dataJson.text && dataJson.text != ""
+            ? dataJson.text
+            : "",
       },
     };
   },
