@@ -4,10 +4,21 @@ module.exports = {
   },
   formatJSONResponse: (dataJson) => {
     const resItems = dataJson.results.slice(0, 4);
+    const categoriesAvalaibleArray = dataJson.available_filters.filter(
+      (item) => item.id == "category"
+    );
+    const categoriesAvalaibleArraySorted =
+      categoriesAvalaibleArray.length > 0
+        ? categoriesAvalaibleArray[0].values.sort((a, b) =>
+            a.results > b.results ? -1 : b.results > a.results ? 1 : 0
+          )
+        : [];
     return {
       author: getAuthor(),
-      categories: dataJson.filters.filter((item) => item.id == "category")[0]
-        .values[0].path_from_root,
+      categories:
+        categoriesAvalaibleArraySorted.length > 0
+          ? categoriesAvalaibleArraySorted
+          : [],
       items: resItems.map((item) => formatItem(item)),
     };
   },

@@ -23,6 +23,7 @@ router.get("/items", async (req, res) => {
         res.status(body.statusCode).json(JSON.parse(body.body));
       }
     } catch (err) {
+      console.log("err", err);
       res.status(500).json(err);
     }
   });

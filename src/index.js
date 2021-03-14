@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const morgan = require("morgan");
 
 const indexRoutes = require("./routes/index");
 
@@ -10,6 +11,7 @@ app.use(cors());
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(morgan("combined"));
 
 app.use("/api", indexRoutes);
 
