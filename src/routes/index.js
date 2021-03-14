@@ -15,7 +15,6 @@ router.get("/items", async (req, res) => {
       "Content-Type": "application/json; charset=UTF-8",
     },
   };
-  console.log("urlRequest", urlRequest);
   request.get(urlRequest, (err, body) => {
     try {
       if (err) {
@@ -24,7 +23,6 @@ router.get("/items", async (req, res) => {
         const dataRes = formatJSONResponse(JSON.parse(body.body));
         res.status(200).json(dataRes);
       } else {
-        console.log("body.body", body.body);
         res.status(body.statusCode).json(body.body);
       }
     } catch (err) {
